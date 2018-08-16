@@ -3,16 +3,25 @@
 require ('constants.php');
 require ('middleware.php');
 
-if (isset($_POST['storeId']) && isset($_POST['review'])) {
+if (isset($_POST['storeId']) && isset($_POST['rating'])) {
 
 	$storeId = mysqli_escape_string($conn, $_POST['storeId']);
-	$review = mysqli_escape_string($conn, $_POST['review']);
+	$rating = mysqli_escape_string($conn, $_POST['rating']);
 
-	$addReviewQuery = "INSERT INTO reviews (storeId, review, review_time) VALUES ('$storeId', '$review', NOW())";
+	if (isset($_POST['review'])) {
+		$review = mysqli_escape_string($conn, $_POST['review']);
+	}else{
+		$review=NULL;
+	}
+
+	$addReviewQuery = "INSERT INTO reviews (store_id, rating, review, review_time) VALUES ('$storeId', '$rating', '$review', NOW())";
+	
+	$updateRatingQuery = "UPDATE stores SET rating=(rating*total_ratings+'$rating')/(total_ratings+1), total_ratings=total_ratings+1 WHERE id='$storeId'";
 
 	$result = mysqli_query($conn, $addReviewQuery);
+	$result2 = mysqli_query($conn, $updateRatingQuery);
 
-	if ($result) {
+	if ($result && $result2) {
 		$response = array(
 		    'result' => array(
 		        'success' => True,
