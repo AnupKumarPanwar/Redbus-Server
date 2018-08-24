@@ -1,7 +1,6 @@
 <?php
 
 require ('constants.php');
-require ('middleware.php');
 
 if (isset($_POST['category'])) {
 	

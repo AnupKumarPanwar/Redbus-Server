@@ -1,7 +1,6 @@
 <?php
 
 require ('constants.php');
-require ('middleware.php');
 
 $getAllCategoriesQuery = "SELECT * FROM categories WHERE 1";
 $result = mysqli_query($conn, $getAllCategoriesQuery);
