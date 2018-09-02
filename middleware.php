@@ -29,7 +29,7 @@ if (!isset($headers['Authorization']) || empty($headers['Authorization'])) {
 	else {
 		$user_id = mysqli_fetch_assoc($result)['id'];
 		$_SESSION['access_token'] = $access_token;
-		$_SESSION['userId'] = $userId;
+		$_SESSION['userId'] = $user_id;
 	}
 }
 
@@ -79,7 +79,7 @@ function upload_image($sub_dir) {
 	    'result' => array(
 	        'success' => $uploadOk,
 	        'message' => $message,
-	        'file_name' => $target_file
+	        'file_name' => substr($target_file,1)
 	    )
 	);
 	return $response;
