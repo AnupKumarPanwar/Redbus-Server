@@ -5,7 +5,8 @@ session_start();
 
 $headers = apache_request_headers();
 
-if (!isset($headers['Authorization']) || empty($headers['Authorization'])) {
+
+if (!isset($headers['authorization']) || empty($headers['authorization'])) {
 	$response = array(
 	    'result' => array(
 	        'success' => False,
@@ -14,7 +15,7 @@ if (!isset($headers['Authorization']) || empty($headers['Authorization'])) {
 	);
 	die(json_encode($response));
 } else {
-	$access_token = mysqli_escape_string($conn, $headers['Authorization']);
+	$access_token = mysqli_escape_string($conn, $headers['authorization']);
 	$checkAccessToken = "SELECT id, access_token FROM users WHERE access_token = '$access_token'";
 	$result = mysqli_query($conn, $checkAccessToken);
 	if (mysqli_num_rows($result)!=1) {

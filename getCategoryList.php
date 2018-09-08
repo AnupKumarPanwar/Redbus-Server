@@ -8,6 +8,7 @@ $result = mysqli_query($conn, $getAllCategoriesQuery);
 if ($result) {
 	$allCategoriesList=array();
 	while ($r = mysqli_fetch_assoc($result)) {
+		$r['thumbnail'] = $baseURL.$r['thumbnail'];
 		$allCategoriesList[] = $r;
 	}
 
