@@ -6,7 +6,13 @@ if (isset($_POST['category'])) {
 	
 	$category = mysqli_escape_string($conn, $_POST['category']);
 
-	$getAllStoresQuery = "SELECT * FROM stores WHERE category='$category'";
+	$getAllStoresQuery = "SELECT * FROM stores, retailers WHERE category='$category' and id=store_id";
+
+
+	if ($category==-1) {
+		$getAllStoresQuery = "SELECT * FROM stores, retailers WHERE id=store_id";
+	}
+
 	$result = mysqli_query($conn, $getAllStoresQuery);
 
 	if ($result) {
@@ -38,7 +44,7 @@ else {
 	$response = array(
 	    'result' => array(
 	        'success' => False,
-	        'message' => 'Failed to fetch stores list.'
+	        'message' => 'Some error occured.'
 	    )
 	);
 	die(json_encode($response));
