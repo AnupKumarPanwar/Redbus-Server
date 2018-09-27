@@ -33,7 +33,7 @@ ini_set('display_errors', 1);
 
 
 	
-$baseURL = ' http://d18c4757.ngrok.io/zomato';
+$baseURL = 'http://7c9bc525.ngrok.io/zomato';
 
 $dbServer = 'localhost';
 $dbName = 'zomato';
