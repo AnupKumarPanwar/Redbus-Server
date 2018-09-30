@@ -69,7 +69,8 @@ if (isset($_POST['phone']) && isset($_POST['card']) && isset($_POST['name']))
             $response = array(
                 'result' => array(
                     'success' => True,
-                    'message' => 'Verify the OTP.'
+                    'message' => 'Verify the OTP.',
+                    'data' => $otp
                 )
             );
            
