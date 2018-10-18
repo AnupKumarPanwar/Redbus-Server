@@ -80,7 +80,7 @@ function upload_image($sub_dir) {
 	    'result' => array(
 	        'success' => $uploadOk,
 	        'message' => $message,
-	        'file_name' => substr($target_file,1)
+	        'file_name' => substr($target_file,2)
 	    )
 	);
 	return $response;

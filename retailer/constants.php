@@ -56,6 +56,6 @@ if (!$conn) {
 	die('Error connection to the database');
 }
 
-$uploadDirectory = './uploads/';
+$uploadDirectory = '../uploads/';
 
 ?>
