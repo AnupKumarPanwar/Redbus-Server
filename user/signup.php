@@ -43,21 +43,21 @@ if (isset($_POST['phone']) && isset($_POST['card']) && isset($_POST['name']))
     }
     else
     {
-        $checkCardNumber = "SELECT card_number FROM cards WHERE card_number='$card' AND is_used=0";
-        $result = mysqli_query($conn, $checkCardNumber);
-        if (mysqli_num_rows($result) != 1) {
-            $response = array(
-                'result' => array(
-                    'success' => False,
-                    'message' => 'Card number is invalid or already used.'
-                )
-            );
-            die(json_encode($response));
-        }
+        // $checkCardNumber = "SELECT card_number FROM cards WHERE card_number='$card' AND is_used=0";
+        // $result = mysqli_query($conn, $checkCardNumber);
+        // if (mysqli_num_rows($result) != 1) {
+        //     $response = array(
+        //         'result' => array(
+        //             'success' => False,
+        //             'message' => 'Card number is invalid or already used.'
+        //         )
+        //     );
+        //     die(json_encode($response));
+        // }
 
         $randCode = generateAccessToken();
         $otp = generateOTP();
-        echo $otp;
+        // echo $otp;
         $signup_user = "INSERT INTO users (name, phone, card, access_token) VALUES ('$name', '$phone', '$card', '$randCode')";
         $result = mysqli_query($conn, $signup_user);
         

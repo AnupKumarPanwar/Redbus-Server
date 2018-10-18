@@ -33,9 +33,11 @@ if (isset($_POST['otp']))
     else
     {
         $access_token = $_SESSION['access_token'];
-        $updateCardUsed = "UPDATE cards, users set cards.is_used=1 WHERE cards.card_number=users.card AND users.access_token='$access_token'";
-        $result = mysqli_query($conn, $updateCardUsed);
+        // $updateCardUsed = "UPDATE cards, users set cards.is_used=1 WHERE cards.card_number=users.card AND users.access_token='$access_token'";
+        // $result = mysqli_query($conn, $updateCardUsed);
 
+        $result = True;
+        
         $randCode = generateAccessToken();
         $updateAccessToken = "UPDATE users set access_token='$randCode' WHERE access_token='$access_token'";
         $result2 = mysqli_query($conn, $updateAccessToken);
