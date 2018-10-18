@@ -18,7 +18,7 @@ if (isset($_POST['username']) && isset($_POST['password']))
     $username = mysqli_escape_string($conn, $_POST['username']);
     $password = mysqli_escape_string($conn, $_POST['password']);
 
-    $checkIfAlreadyRegistered = "SELECT access_token, username FROM admins WHERE username='$username' and password='$password'";
+    $checkIfAlreadyRegistered = "SELECT access_token, username FROM retailers WHERE username='$username' and password='$password'";
     $result = mysqli_query($conn, $checkIfAlreadyRegistered);
     if (mysqli_num_rows($result) != 1)
     {
