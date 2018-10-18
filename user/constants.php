@@ -33,21 +33,20 @@ ini_set('display_errors', 1);
 
 
 	
-$baseURL = 'http://7c9bc525.ngrok.io/zomato';
+// $baseURL = 'http://7c9bc525.ngrok.io/zomato';
+
+// $dbServer = 'localhost';
+// $dbName = 'zomato';
+// $dbUser = 'root';
+// $dbPassword = 'biappanwar';
+
+
+$baseURL = 'http://139.59.62.176/api';
 
 $dbServer = 'localhost';
 $dbName = 'zomato';
-$dbUser = 'root';
-$dbPassword = 'biappanwar';
-
-
-// $baseURL = 'https://bnmhash.000webhostapp.com/worthit';
-
-// $dbServer = 'localhost';
-// $dbName = 'id2254995_worthit';
-// $dbUser = 'id2254995_root';
-// $dbPassword = 'biappanwar';
-
+$dbUser = 'admin';
+$dbPassword = 'fc9f45eb08b6a26743502ac22a7f5bcbae2570fd242d0389';
 
 
 $conn = mysqli_connect($dbServer, $dbUser, $dbPassword, $dbName);
