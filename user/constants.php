@@ -41,7 +41,7 @@ ini_set('display_errors', 1);
 // $dbPassword = 'biappanwar';
 
 
-$baseURL = 'http://139.59.62.176/api';
+$baseURL = 'https://api.worthitproduction.com';
 
 $dbServer = 'localhost';
 $dbName = 'zomato';
