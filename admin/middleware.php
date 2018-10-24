@@ -6,7 +6,7 @@ session_start();
 $headers = apache_request_headers();
 
 
-if (!isset($headers['authorization']) || empty($headers['authorization'])) {
+if (!isset($headers['Authorization']) || empty($headers['Authorization'])) {
 	$response = array(
 	    'result' => array(
 	        'success' => False,
@@ -15,7 +15,7 @@ if (!isset($headers['authorization']) || empty($headers['authorization'])) {
 	);
 	die(json_encode($response));
 } else {
-	$access_token = mysqli_escape_string($conn, $headers['authorization']);
+	$access_token = mysqli_escape_string($conn, $headers['Authorization']);
 	$checkAccessToken = "SELECT id, access_token FROM admins WHERE access_token = '$access_token'";
 	$result = mysqli_query($conn, $checkAccessToken);
 	if (mysqli_num_rows($result)!=1) {
