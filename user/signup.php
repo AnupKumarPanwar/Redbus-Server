@@ -66,6 +66,16 @@ if (isset($_POST['phone']) && isset($_POST['card']) && isset($_POST['name']))
             $_SESSION['otp'] = $otp;
             $_SESSION['access_token'] = $randCode;
 
+            $sms_text = 'Dear user, your Worthit login OTP is '.$otp;
+
+            $sms_api = 'https://www.uengage.in/ueapi/send?usr=contact@worthitproduction.com&pwd=worthit123&mobileNo='.$phone.'&senderId=worthi&smsText='.$sms_text;
+
+            // echo $sms_api;
+
+            $send = file_get_contents($sms_api);
+
+            // echo $send;
+
             $response = array(
                 'result' => array(
                     'success' => True,

@@ -34,6 +34,16 @@ if (isset($_POST['phone']))
         $otp = generateOTP();
         $_SESSION['otp'] = $otp;
 
+        $sms_text = 'Dear user, your Worthit login OTP is '.$otp;
+
+        $sms_api = 'https://www.uengage.in/ueapi/send?usr=contact@worthitproduction.com&pwd=worthit123&mobileNo='.$phone.'&senderId=worthi&smsText='.$sms_text;
+
+        // echo $sms_api;
+
+        $send = file_get_contents($sms_api);
+
+        // echo $send;
+
         $r=mysqli_fetch_assoc($result);
         $access_token = $r['access_token'];
         $_SESSION['access_token'] = $access_token;
