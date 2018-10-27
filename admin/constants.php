@@ -33,7 +33,7 @@ ini_set('display_errors', 1);
 
 
 	
-// $baseURL = 'http://7c9bc525.ngrok.io/zomato';
+// $baseURL = 'http://localhost/zomato';
 
 // $dbServer = 'localhost';
 // $dbName = 'zomato';
@@ -56,6 +56,6 @@ if (!$conn) {
 	die('Error connection to the database');
 }
 
-$uploadDirectory = './uploads/';
+$uploadDirectory = '../uploads/';
 
 ?>
