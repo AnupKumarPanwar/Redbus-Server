@@ -35,6 +35,21 @@ if (isset($_POST['offerId'])) {
 	// 	die(json_encode($response));
 	// }
 
+	$getCouponCodeQuery = "SELECT * FROM coupons WHERE offer_id='$offerId' AND user_id='$userId' AND used=0";
+	$result = mysqli_query($conn, $getCouponCodeQuery);
+	if (mysqli_num_rows($result)==1) {
+		$r = mysqli_fetch_assoc($result);
+		$coupon_code = $r['coupon_code'];
+		$response = array(
+		    'result' => array(
+		        'success' => True,
+		        'message' => 'Coupon fetched successfully.',
+		        'data' => $coupon_code
+		    )
+		);
+		die(json_encode($response));
+	}
+
 	$coupon_code = generateCouponCode();
 
 	$addCouponCodeQuery = "INSERT INTO coupons (offer_id, user_id, coupon_code, created_at, used) VALUES ('$offerId', '$userId', '$coupon_code', NOW(), 0)";
