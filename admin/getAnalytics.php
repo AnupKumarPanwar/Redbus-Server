@@ -23,7 +23,7 @@ $newUserQuery = "SELECT count(*) as res FROM users WHERE created_at >= (NOW()-IN
 $result6 = mysqli_query($conn, $newUserQuery);
 
 if ($result1 && $result2 && $result3 && $result4 && $result5 && $result6) {
-	$analytics=array();
+
 
 	$totalOffer = mysqli_fetch_assoc($result1)['res'];
 	$totalRetailers = mysqli_fetch_assoc($result2)['res'];
@@ -32,18 +32,18 @@ if ($result1 && $result2 && $result3 && $result4 && $result5 && $result6) {
 	$totalUsers = mysqli_fetch_assoc($result5)['res'];
 	$newUsers = mysqli_fetch_assoc($result6)['res'];
 
-	$analytics[] = $totalOffer;
-	$analytics[] = $totalRetailers;
-	$analytics[] = $totalOffersUnlocked;
-	$analytics[] = $totalOffersUsed;
-	$analytics[] = $totalUsers;
-	$analytics[] = $newUsers;
-
 	$response = array(
 	    'result' => array(
 	        'success' => True,
 	        'message' => 'Successfully fetched analytics data.',
-	        'data' => $analytics
+	        'data' => array(
+	        	'totalOffer' => $totalOffer,
+	        	'totalRetailers' => $totalRetailers,
+	        	'totalOffersUnlocked' => $totalOffersUnlocked,
+	        	'totalOffersUsed' => $totalOffersUsed,
+	        	'totalUsers' => $totalUsers,
+	        	'newUsers' => $newUsers
+	        )
 	    )
 	);
 	die(json_encode($response));
