@@ -58,7 +58,7 @@ if (isset($_POST['phone']) && isset($_POST['card']) && isset($_POST['name']))
         $randCode = generateAccessToken();
         $otp = generateOTP();
         // echo $otp;
-        $signup_user = "INSERT INTO users (name, phone, card, access_token) VALUES ('$name', '$phone', '$card', '$randCode')";
+        $signup_user = "INSERT INTO users (name, phone, card, access_token, created_at) VALUES ('$name', '$phone', '$card', '$randCode', NOW())";
         $result = mysqli_query($conn, $signup_user);
         
         if ($result)

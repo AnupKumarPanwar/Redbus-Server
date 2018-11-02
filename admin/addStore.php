@@ -13,7 +13,7 @@ function generateAccessToken($length = 20) {
     return $randomString;
 }
 
-if (isset($_POST['name']) && isset($_POST['address']) && isset($_POST['phone']) && isset($_POST['category']) && isset($_POST['username']) && isset($_POST['password'])  && isset($_POST['lat']) && isset($_POST['lng']) && isset($_POST['video'])) {
+if (isset($_POST['name']) && isset($_POST['address']) && isset($_POST['phone']) && isset($_POST['category']) && isset($_POST['username']) && isset($_POST['password'])  && isset($_POST['coordinates']) && isset($_POST['video'])) {
 
 	$name = mysqli_escape_string($conn, $_POST['name']);
 	$address = mysqli_escape_string($conn, $_POST['address']);
@@ -21,14 +21,13 @@ if (isset($_POST['name']) && isset($_POST['address']) && isset($_POST['phone']) 
 	$category = mysqli_escape_string($conn, $_POST['category']);
 	$username = mysqli_escape_string($conn, $_POST['username']);
 	$password = mysqli_escape_string($conn, $_POST['password']);
-	$lat = mysqli_escape_string($conn, $_POST['lat']);
-	$lng = mysqli_escape_string($conn, $_POST['lng']);
+	$coordinates = mysqli_escape_string($conn, $_POST['coordinates']);
 	$video = mysqli_escape_string($conn, $_POST['video']);
 
 	if (isset($_POST['storeId'])) {
 		$storeId = mysqli_escape_string($conn, $_POST['storeId']);
 
-		$updateStoreQuery = "UPDATE stores SET name='$name', address='$address', phone='$phone', category='$category', lat='$lat', lng='$lng', video='$video' WHERE id='$storeId'";
+		$updateStoreQuery = "UPDATE stores SET name='$name', address='$address', phone='$phone', category='$category', coordinates='$coordinates', video='$video' WHERE id='$storeId'";
 
 		$updateRetailerQuery = "UPDATE retailers SET username='$username', password='$password' WHERE store_id='$storeId'";
 
@@ -60,7 +59,7 @@ if (isset($_POST['name']) && isset($_POST['address']) && isset($_POST['phone']) 
 	if ($result['result']['success']) {
 		$file_name = $result['result']['file_name'];
 
-		$addStoreQuery = "INSERT INTO stores (name, photo, address, phone, category, lat, lng, video) VALUES ('$name', '$file_name', '$address', '$phone', '$category', '$lat', '$lng', '$video')";
+		$addStoreQuery = "INSERT INTO stores (name, photo, address, phone, category, coordinates, video) VALUES ('$name', '$file_name', '$address', '$phone', '$category', '$coordinates', '$video')";
 
 		$result = mysqli_query($conn, $addStoreQuery);
 
