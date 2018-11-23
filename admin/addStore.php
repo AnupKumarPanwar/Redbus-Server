@@ -13,7 +13,7 @@ function generateAccessToken($length = 20) {
     return $randomString;
 }
 
-if (isset($_POST['name']) && isset($_POST['address']) && isset($_POST['phone']) && isset($_POST['category']) && isset($_POST['username']) && isset($_POST['password'])  && isset($_POST['coordinates']) && isset($_POST['video']) && isset($_POST['managerName']) && isset($_POST['managerPhone'])) {
+if (isset($_POST['name']) && isset($_POST['address']) && isset($_POST['phone']) && isset($_POST['category']) && isset($_POST['username']) && isset($_POST['password'])  && isset($_POST['coordinates']) && isset($_POST['video']) && isset($_POST['manager_name']) && isset($_POST['manager_phone'])) {
 
 	$name = mysqli_escape_string($conn, $_POST['name']);
 	$address = mysqli_escape_string($conn, $_POST['address']);
@@ -23,8 +23,8 @@ if (isset($_POST['name']) && isset($_POST['address']) && isset($_POST['phone']) 
 	$password = mysqli_escape_string($conn, $_POST['password']);
 	$coordinates = mysqli_escape_string($conn, $_POST['coordinates']);
 	$video = mysqli_escape_string($conn, $_POST['video']);
-	$manager_name = mysqli_escape_string($conn, $_POST['managerName']);
-	$manager_phone = mysqli_escape_string($conn, $_POST['managerPhone']);
+	$manager_name = mysqli_escape_string($conn, $_POST['manager_name']);
+	$manager_phone = mysqli_escape_string($conn, $_POST['manager_phone']);
 
 	if (isset($_POST['storeId'])) {
 		$storeId = mysqli_escape_string($conn, $_POST['storeId']);
