@@ -6,11 +6,11 @@ if (isset($_POST['category'])) {
 	
 	$category = mysqli_escape_string($conn, $_POST['category']);
 
-	$getAllStoresQuery = "SELECT id, name, photo, address, phone, rating, total_ratings, category FROM stores, retailers WHERE category='$category' and stores.id=retailers.store_id";
+	$getAllStoresQuery = "SELECT id, name, photo, address, phone, rating, total_ratings, category, video, coordinates FROM stores, retailers WHERE category='$category' and stores.id=retailers.store_id";
 
 
 	if ($category==-1) {
-		$getAllStoresQuery = "SELECT id, name, photo, address, phone, rating, total_ratings, category FROM stores, retailers WHERE id=store_id";
+		$getAllStoresQuery = "SELECT id, name, photo, address, phone, rating, total_ratings, category, video, coordinates FROM stores, retailers WHERE id=store_id";
 	}
 
 	$result = mysqli_query($conn, $getAllStoresQuery);
