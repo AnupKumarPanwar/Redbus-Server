@@ -21,7 +21,7 @@ if (isset($_POST['name']) && isset($_POST['address']) && isset($_POST['phone']) 
 	$category = mysqli_escape_string($conn, $_POST['category']);
 	$username = mysqli_escape_string($conn, $_POST['username']);
 	$password = mysqli_escape_string($conn, $_POST['password']);
-	$coordinates = explode(",",mysqli_escape_string($conn, $_POST['coordinates']));
+	$coordinates = mysqli_escape_string($conn, $_POST['coordinates']);
 	$coords = explode(",",mysqli_escape_string($conn, $_POST['coordinates']));
 	$lat = $coords[0];
 	$lng = $coords[1];
