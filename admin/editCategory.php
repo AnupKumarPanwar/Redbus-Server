@@ -3,15 +3,23 @@
 require ('constants.php');
 require ('middleware.php');
 
-if (isset($_POST['categoryName']) && isset($_FILES["imageToUpload"]) && isset($_POST['categoryId'])) {
+if (isset($_POST['categoryName']) && isset($_POST['categoryId'])) {
 	$categoryName = mysqli_escape_string($conn, $_POST['categoryName']);
 	$categoryId = mysqli_escape_string($conn, $_POST['categoryId']);
 
-	$result = upload_image('categories');
-
-	if ($result['result']['success']) {
+	if(isset($_FILES["imageToUpload"])){
+		$result = upload_image('categories');
 		$file_name = $result['result']['file_name'];
-		$editCategoryQuery = "UPDATE categories SET name='$categoryName', thumbnail='$file_name' WHERE id='$categoryId'";
+		if ($result['result']['success']) {
+			$editCategoryQuery = "UPDATE categories SET name='$categoryName', thumbnail='$file_name' WHERE id='$categoryId'";
+		}
+	}
+	else {
+		$editCategoryQuery = "UPDATE categories SET name='$categoryName' WHERE id='$categoryId'";
+	}
+
+	if (True) {
+		
 		$result = mysqli_query($conn, $editCategoryQuery);
 
 		if ($result) {
