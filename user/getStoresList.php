@@ -6,24 +6,24 @@ if (isset($_POST['category'])) {
 	
 	$category = mysqli_escape_string($conn, $_POST['category']);
 
-	$getAllStoresQuery = "SELECT id, name, photo, address, phone, rating, total_ratings, category, video, lat, lng FROM stores, retailers WHERE category='$category' and stores.id=retailers.store_id";
+	$getAllStoresQuery = "SELECT id, name, photo, address, phone, rating, total_ratings, category, video, coordinates, lat, lng FROM stores, retailers WHERE category='$category' and stores.id=retailers.store_id";
 
 	if (isset($_POST['lat']) && isset($_POST['lng'])) {
 		$lat = mysqli_escape_string($conn, $_POST['lat']);
 		$lng = mysqli_escape_string($conn, $_POST['lng']);
 
-		$getAllStoresQuery = "SELECT id, name, photo, address, phone, rating, total_ratings, category, video, lat, lng FROM stores, retailers WHERE category='$category' and stores.id=retailers.store_id order by ('$lat'-lat)*('$lat'-lat) + ('$lng'-lng)*('$lng'-lng)";
+		$getAllStoresQuery = "SELECT id, name, photo, address, phone, rating, total_ratings, category, video, coordinates, lat, lng FROM stores, retailers WHERE category='$category' and stores.id=retailers.store_id order by ('$lat'-lat)*('$lat'-lat) + ('$lng'-lng)*('$lng'-lng)";
 	}
 
 
 	if ($category==-1) {
-		$getAllStoresQuery = "SELECT id, name, photo, address, phone, rating, total_ratings, category, video, lat, lng FROM stores, retailers WHERE id=store_id";
+		$getAllStoresQuery = "SELECT id, name, photo, address, phone, rating, total_ratings, category, video, coordinates, lat, lng FROM stores, retailers WHERE id=store_id";
 
 		if (isset($_POST['lat']) && isset($_POST['lng'])) {
 			$lat = mysqli_escape_string($conn, $_POST['lat']);
 			$lng = mysqli_escape_string($conn, $_POST['lng']);
 
-			$getAllStoresQuery = "SELECT id, name, photo, address, phone, rating, total_ratings, category, video, lat, lng FROM stores, retailers WHERE id=store_id order by ('$lat'-lat)*('$lat'-lat) + ('$lng'-lng)*('$lng'-lng)";
+			$getAllStoresQuery = "SELECT id, name, photo, address, phone, rating, total_ratings, category, video, coordinates, lat, lng FROM stores, retailers WHERE id=store_id order by ('$lat'-lat)*('$lat'-lat) + ('$lng'-lng)*('$lng'-lng)";
 		}
 	}
 

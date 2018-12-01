@@ -22,8 +22,9 @@ if (isset($_POST['name']) && isset($_POST['address']) && isset($_POST['phone']) 
 	$username = mysqli_escape_string($conn, $_POST['username']);
 	$password = mysqli_escape_string($conn, $_POST['password']);
 	$coordinates = explode(",",mysqli_escape_string($conn, $_POST['coordinates']));
-	$lat = $coordinates[0];
-	$lng = $coordinates[1];
+	$coords = explode(",",mysqli_escape_string($conn, $_POST['coordinates']));
+	$lat = $coords[0];
+	$lng = $coords[1];
 
 	$video = mysqli_escape_string($conn, $_POST['video']);
 	$manager_name = mysqli_escape_string($conn, $_POST['manager_name']);
@@ -32,7 +33,7 @@ if (isset($_POST['name']) && isset($_POST['address']) && isset($_POST['phone']) 
 	if (isset($_POST['storeId'])) {
 		$storeId = mysqli_escape_string($conn, $_POST['storeId']);
 
-		$updateStoreQuery = "UPDATE stores SET name='$name', address='$address', phone='$phone', category='$category', lat='$lat', lng='$lng', video='$video', manager_name='$manager_name', manager_phone='$manager_phone' WHERE id='$storeId'";
+		$updateStoreQuery = "UPDATE stores SET name='$name', address='$address', phone='$phone', category='$category', coordinates='$coordinates', lat='$lat', lng='$lng', video='$video', manager_name='$manager_name', manager_phone='$manager_phone' WHERE id='$storeId'";
 
 		$updateRetailerQuery = "UPDATE retailers SET username='$username', password='$password' WHERE store_id='$storeId'";
 
@@ -64,7 +65,7 @@ if (isset($_POST['name']) && isset($_POST['address']) && isset($_POST['phone']) 
 	if ($result['result']['success']) {
 		$file_name = $result['result']['file_name'];
 
-		$addStoreQuery = "INSERT INTO stores (name, photo, address, phone, category, lat, lng, video, manager_name, manager_phone) VALUES ('$name', '$file_name', '$address', '$phone', '$category', '$lat', '$lng', '$video', '$manager_name', '$manager_phone')";
+		$addStoreQuery = "INSERT INTO stores (name, photo, address, phone, category, lat, lng, video, manager_name, manager_phone, coordinates) VALUES ('$name', '$file_name', '$address', '$phone', '$category', '$lat', '$lng', '$video', '$manager_name', '$manager_phone', '$coordinates')";
 
 		$result = mysqli_query($conn, $addStoreQuery);
 
