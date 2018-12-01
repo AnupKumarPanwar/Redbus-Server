@@ -11,8 +11,8 @@ if (isset($_POST['categoryName']) && isset($_FILES["imageToUpload"]) && isset($_
 
 	if ($result['result']['success']) {
 		$file_name = $result['result']['file_name'];
-		$addCategoryQuery = "UPDATE categories SET name='$categoryName', thumbnail='$file_name' WHERE id='$categoryId'";
-		$result = mysqli_query($conn, $addCategoryQuery);
+		$editCategoryQuery = "UPDATE categories SET name='$categoryName', thumbnail='$file_name' WHERE id='$categoryId'";
+		$result = mysqli_query($conn, $editCategoryQuery);
 
 		if ($result) {
 			$response = array(
