@@ -33,13 +33,18 @@ if (isset($_POST['otp']))
     else
     {
         $access_token = $_SESSION['access_token'];
-        // $updateCardUsed = "UPDATE cards, users set cards.is_used=1 WHERE cards.card_number=users.card AND users.access_token='$access_token'";
-        // $result = mysqli_query($conn, $updateCardUsed);
 
-        $result = True;
-        
+        $getReferrerCode = "SELECT referrer_by FROM users WHERE access_token='$access_token'";
+        $result = mysqli_query($conn, $getReferrerCode);
+        $r = mysqli_fetch_assoc($result);
+        $referrer_by = $r['referrer_by'];
+
+        $addCreditsToReferrer = "UPDATE users set credits=credits+100 WHERE (access_token='$access_token' or referral_code='$referrer_by') and verified=0";
+        $result = mysqli_query($conn, $addCreditsToReferrer);
+
+
         $randCode = generateAccessToken();
-        $updateAccessToken = "UPDATE users set access_token='$randCode' WHERE access_token='$access_token'";
+        $updateAccessToken = "UPDATE users set access_token='$randCode', verified=1 WHERE access_token='$access_token'";
         $result2 = mysqli_query($conn, $updateAccessToken);
         if ($result && $result2) {
             $_SESSION['access_token'] = $randCode;
