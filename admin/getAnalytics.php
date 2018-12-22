@@ -7,7 +7,7 @@ require ('middleware.php');
 $totalOffersQuery = "SELECT count(*) as res FROM offers WHERE 1";
 $result1 = mysqli_query($conn, $totalOffersQuery);
 
-$totalRetailersQuery = "SELECT count(*) as res FROM stores WHERE 1";
+$totalRetailersQuery = "SELECT count(*) as res FROM retailers WHERE 1";
 $result2 = mysqli_query($conn, $totalRetailersQuery);
 
 $totalOffersUnlockedQuery = "SELECT count(*) as res FROM coupons WHERE 1";

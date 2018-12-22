@@ -13,6 +13,17 @@ function generateAccessToken($length = 20) {
     return $randomString;
 }
 
+function generateReferralCode($length = 6) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
+
 function generateOTP($length = 4) {
     $characters = '0123456789';
     $charactersLength = strlen($characters);
@@ -28,6 +39,8 @@ if (isset($_POST['phone']) && isset($_POST['card']) && isset($_POST['name']))
     $phone = mysqli_escape_string($conn, $_POST['phone']);
     $card = mysqli_escape_string($conn, $_POST['card']);
     $name = mysqli_escape_string($conn, $_POST['name']);
+    
+    $referredBy = mysqli_escape_string($conn, $_POST['referred_by']);
 
     $checkIfAlreadyRegistered = "SELECT name FROM users WHERE phone='$phone'";
     $result = mysqli_query($conn, $checkIfAlreadyRegistered);
@@ -56,9 +69,10 @@ if (isset($_POST['phone']) && isset($_POST['card']) && isset($_POST['name']))
         // }
 
         $randCode = generateAccessToken();
+        $referralCode = generateReferralCode();
         $otp = generateOTP();
         // echo $otp;
-        $signup_user = "INSERT INTO users (name, phone, card, access_token, created_at) VALUES ('$name', '$phone', '$card', '$randCode', NOW())";
+        $signup_user = "INSERT INTO users (name, phone, card, access_token, created_at, renew_time, referral_code, referred_by) VALUES ('$name', '$phone', '$card', '$randCode', NOW(), NOW(), '$referralCode', '$referredBy')";
         $result = mysqli_query($conn, $signup_user);
         
         if ($result)
