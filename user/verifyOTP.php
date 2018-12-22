@@ -34,12 +34,12 @@ if (isset($_POST['otp']))
     {
         $access_token = $_SESSION['access_token'];
 
-        $getReferrerCode = "SELECT referrer_by FROM users WHERE access_token='$access_token'";
+        $getReferrerCode = "SELECT referred_by FROM users WHERE access_token='$access_token'";
         $result = mysqli_query($conn, $getReferrerCode);
         $r = mysqli_fetch_assoc($result);
-        $referrer_by = $r['referrer_by'];
+        $referred_by = $r['referred_by'];
 
-        $addCreditsToReferrer = "UPDATE users set credits=credits+100 WHERE (access_token='$access_token' or referral_code='$referrer_by') and verified=0";
+        $addCreditsToReferrer = "UPDATE users set credits=credits+100 WHERE (access_token='$access_token' and verified=0) or referral_code='$referred_by'";
         $result = mysqli_query($conn, $addCreditsToReferrer);
 
 
