@@ -17,46 +17,20 @@ if (isset($_POST['phone']))
 {
     $phone = mysqli_escape_string($conn, $_POST['phone']);
 
-    $checkIfAlreadyRegistered = "SELECT access_token FROM users WHERE phone='$phone'";
-    $result = mysqli_query($conn, $checkIfAlreadyRegistered);
-    if (mysqli_num_rows($result) != 1)
-    {
-        $response = array(
-            'result' => array(
-                'success' => False,
-                'message' => 'Phone number not registered.'
-            )
-        );
-        die(json_encode($response));
-    }
-    else
-    {
-        $otp = generateOTP();
-        $_SESSION['otp'] = $otp;
+    $loginQuery = "SELECT * FROM users WHERE phone='$phone'";
+    $result = mysqli_query($conn, $loginQuery);
 
-        $sms_text = 'Dear user, your Worthit login OTP is '.$otp;
+    $r=mysqli_fetch_assoc($result);
 
-        $sms_api = 'https://www.uengage.in/ueapi/send?usr=contact@worthitproduction.com&pwd=worthit123&mobileNo='.$phone.'&senderId=worthi&smsText='.$sms_text;
-
-        // echo $sms_api;
-
-        $send = file_get_contents($sms_api);
-
-        // echo $send;
-
-        $r=mysqli_fetch_assoc($result);
-        $access_token = $r['access_token'];
-        $_SESSION['access_token'] = $access_token;
-
-        $response = array(
-            'result' => array(
-                'success' => True,
-                'message' => 'Verify the OTP.'
-            )
-        );
-       
-        die(json_encode($response));
-    }
+    $response = array(
+        'result' => array(
+            'success' => True,
+            'message' => 'Verify the OTP.',
+            'data' => $r
+        )
+    );
+   
+    die(json_encode($response));
 }
 else
 {

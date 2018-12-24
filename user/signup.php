@@ -13,37 +13,16 @@ function generateAccessToken($length = 20) {
     return $randomString;
 }
 
-function generateReferralCode($length = 6) {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $charactersLength = strlen($characters);
-    $randomString = '';
-    for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
-    }
-    return $randomString;
-}
 
-
-function generateOTP($length = 4) {
-    $characters = '0123456789';
-    $charactersLength = strlen($characters);
-    $randomString = '';
-    for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
-    }
-    return $randomString;
-}
-
-if (isset($_POST['phone']) && isset($_POST['card']) && isset($_POST['name']))
+if (isset($_POST['phone']) && isset($_POST['name']) && isset($_POST['email']))
 {
     $phone = mysqli_escape_string($conn, $_POST['phone']);
-    $card = mysqli_escape_string($conn, $_POST['card']);
+    $email = mysqli_escape_string($conn, $_POST['email']);
     $name = mysqli_escape_string($conn, $_POST['name']);
     
-    $referredBy = mysqli_escape_string($conn, $_POST['referred_by']);
 
-    $checkIfAlreadyRegistered = "SELECT name FROM users WHERE phone='$phone'";
-    $result = mysqli_query($conn, $checkIfAlreadyRegistered);
+    $checkIfPhoneAlreadyRegistered = "SELECT name FROM users WHERE phone='$phone'";
+    $result = mysqli_query($conn, $checkIfPhoneAlreadyRegistered);
     if (mysqli_num_rows($result) != 0)
     {
         $response = array(
@@ -54,47 +33,33 @@ if (isset($_POST['phone']) && isset($_POST['card']) && isset($_POST['name']))
         );
         die(json_encode($response));
     }
+
+    $checkIfEmailAlreadyRegistered = "SELECT name FROM users WHERE email='$email'";
+    $result = mysqli_query($conn, $checkIfEmailAlreadyRegistered);
+
+    if (mysqli_num_rows($result) != 0)
+    {
+        $response = array(
+            'result' => array(
+                'success' => False,
+                'message' => 'Email already registered.'
+            )
+        );
+        die(json_encode($response));
+    }
     else
     {
-        // $checkCardNumber = "SELECT card_number FROM cards WHERE card_number='$card' AND is_used=0";
-        // $result = mysqli_query($conn, $checkCardNumber);
-        // if (mysqli_num_rows($result) != 1) {
-        //     $response = array(
-        //         'result' => array(
-        //             'success' => False,
-        //             'message' => 'Card number is invalid or already used.'
-        //         )
-        //     );
-        //     die(json_encode($response));
-        // }
-
         $randCode = generateAccessToken();
-        $referralCode = generateReferralCode();
-        $otp = generateOTP();
-        // echo $otp;
-        $signup_user = "INSERT INTO users (name, phone, card, access_token, created_at, renew_time, referral_code, referred_by) VALUES ('$name', '$phone', '$card', '$randCode', NOW(), NOW(), '$referralCode', '$referredBy')";
+        
+        $signup_user = "INSERT INTO users (name, phone, email, access_token, created_at) VALUES ('$name', '$phone', '$email', '$randCode', NOW())";
         $result = mysqli_query($conn, $signup_user);
         
         if ($result)
         {
-            $_SESSION['otp'] = $otp;
-            $_SESSION['access_token'] = $randCode;
-
-            $sms_text = 'Dear user, your Worthit login OTP is '.$otp;
-
-            $sms_api = 'https://www.uengage.in/ueapi/send?usr=contact@worthitproduction.com&pwd=worthit123&mobileNo='.$phone.'&senderId=worthi&smsText='.$sms_text;
-
-            // echo $sms_api;
-
-            $send = file_get_contents($sms_api);
-
-            // echo $send;
-
-            $response = array(
+           	$response = array(
                 'result' => array(
                     'success' => True,
-                    'message' => 'Verify the OTP.',
-                    'data' => $otp
+                    'message' => 'Registration successful.'
                 )
             );
            

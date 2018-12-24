@@ -6,7 +6,7 @@ session_start();
 $headers = apache_request_headers();
 
 
-if (!isset($headers['authorization']) || empty($headers['authorization'])) {
+if (!isset($headers['Authorization']) || empty($headers['Authorization'])) {
 	$response = array(
 	    'result' => array(
 	        'success' => False,
@@ -15,8 +15,8 @@ if (!isset($headers['authorization']) || empty($headers['authorization'])) {
 	);
 	die(json_encode($response));
 } else {
-	$access_token = mysqli_escape_string($conn, $headers['authorization']);
-	$checkAccessToken = "SELECT id, access_token FROM users WHERE access_token = '$access_token'";
+	$access_token = mysqli_escape_string($conn, $headers['Authorization']);
+	$checkAccessToken = "SELECT store_id, access_token FROM drivers WHERE access_token = '$access_token'";
 	$result = mysqli_query($conn, $checkAccessToken);
 	if (mysqli_num_rows($result)!=1) {
 		$response = array(
@@ -28,9 +28,9 @@ if (!isset($headers['authorization']) || empty($headers['authorization'])) {
 		die(json_encode($response));
 	}
 	else {
-		$user_id = mysqli_fetch_assoc($result)['id'];
+		$store_id = mysqli_fetch_assoc($result)['store_id'];
 		$_SESSION['access_token'] = $access_token;
-		$_SESSION['userId'] = $user_id;
+		$_SESSION['store_id'] = $store_id;
 	}
 }
 
@@ -80,7 +80,7 @@ function upload_image($sub_dir) {
 	    'result' => array(
 	        'success' => $uploadOk,
 	        'message' => $message,
-	        'file_name' => substr($target_file,1)
+	        'file_name' => substr($target_file,2)
 	    )
 	);
 	return $response;
