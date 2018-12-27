@@ -16,7 +16,7 @@ if (!isset($headers['Authorization']) || empty($headers['Authorization'])) {
 	die(json_encode($response));
 } else {
 	$access_token = mysqli_escape_string($conn, $headers['Authorization']);
-	$checkAccessToken = "SELECT store_id, access_token FROM drivers WHERE access_token = '$access_token'";
+	$checkAccessToken = "SELECT id, access_token FROM buses WHERE access_token = '$access_token'";
 	$result = mysqli_query($conn, $checkAccessToken);
 	if (mysqli_num_rows($result)!=1) {
 		$response = array(
@@ -28,9 +28,9 @@ if (!isset($headers['Authorization']) || empty($headers['Authorization'])) {
 		die(json_encode($response));
 	}
 	else {
-		$store_id = mysqli_fetch_assoc($result)['store_id'];
+		$bus_id = mysqli_fetch_assoc($result)['id'];
 		$_SESSION['access_token'] = $access_token;
-		$_SESSION['store_id'] = $store_id;
+		$_SESSION['bus_id'] = $bus_id;
 	}
 }
 

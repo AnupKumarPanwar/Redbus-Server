@@ -30,7 +30,7 @@ if (!isset($headers['Authorization']) || empty($headers['Authorization'])) {
 	else {
 		$user_id = mysqli_fetch_assoc($result)['id'];
 		$_SESSION['access_token'] = $access_token;
-		$_SESSION['userId'] = $user_id;
+		$_SESSION['user_id'] = $user_id;
 	}
 }
 

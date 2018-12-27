@@ -36,7 +36,7 @@ ini_set('display_errors', 1);
 $baseURL = 'http://localhost';
 
 $dbServer = 'localhost';
-$dbName = 'goto';
+$dbName = 'gotobuses';
 $dbUser = 'root';
 $dbPassword = 'biappanwar';
 

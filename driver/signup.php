@@ -14,15 +14,16 @@ function generateAccessToken($length = 20) {
 }
 
 
-if (isset($_POST['phone']) && isset($_POST['name']) && isset($_POST['email']) && isset($_POST['bus_number']))
+if (isset($_POST['phone']) && isset($_POST['name']) && isset($_POST['email']) && isset($_POST['bus_number']) && isset($_POST['bus_type']))
 {
     $phone = mysqli_escape_string($conn, $_POST['phone']);
     $email = mysqli_escape_string($conn, $_POST['email']);
     $name = mysqli_escape_string($conn, $_POST['name']);
     $bus_number = mysqli_escape_string($conn, $_POST['bus_number']);
+    $bus_type = mysqli_escape_string($conn, $_POST['bus_type']);
     
 
-    $checkIfPhoneAlreadyRegistered = "SELECT name FROM drivers WHERE phone='$phone'";
+    $checkIfPhoneAlreadyRegistered = "SELECT name FROM buses WHERE phone='$phone'";
     $result = mysqli_query($conn, $checkIfPhoneAlreadyRegistered);
     if (mysqli_num_rows($result) != 0)
     {
@@ -35,7 +36,7 @@ if (isset($_POST['phone']) && isset($_POST['name']) && isset($_POST['email']) &&
         die(json_encode($response));
     }
 
-    $checkIfBusAlreadyRegistered = "SELECT name FROM drivers WHERE bus_number='$bus_number'";
+    $checkIfBusAlreadyRegistered = "SELECT name FROM buses WHERE bus_number='$bus_number'";
     $result = mysqli_query($conn, $checkIfPhoneAlreadyRegistered);
     if (mysqli_num_rows($result) != 0)
     {
@@ -48,7 +49,7 @@ if (isset($_POST['phone']) && isset($_POST['name']) && isset($_POST['email']) &&
         die(json_encode($response));
     }
 
-    $checkIfEmailAlreadyRegistered = "SELECT name FROM drivers WHERE email='$email'";
+    $checkIfEmailAlreadyRegistered = "SELECT name FROM buses WHERE email='$email'";
     $result = mysqli_query($conn, $checkIfEmailAlreadyRegistered);
 
     if (mysqli_num_rows($result) != 0)
@@ -65,7 +66,7 @@ if (isset($_POST['phone']) && isset($_POST['name']) && isset($_POST['email']) &&
     {
         $randCode = generateAccessToken();
         
-        $signup_driver = "INSERT INTO drivers (name, phone, email, bus_number, access_token, created_at) VALUES ('$name', '$phone', '$email', '$bus_number', '$randCode', NOW())";
+        $signup_driver = "INSERT INTO buses (name, phone, email, bus_number, bus_type, access_token, created_at) VALUES ('$name', '$phone', '$email', '$bus_number', '$bus_type', '$randCode', NOW())";
         $result = mysqli_query($conn, $signup_driver);
         
         if ($result)
