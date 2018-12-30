@@ -13,27 +13,30 @@ function generateOTP($length = 4) {
     return $randomString;
 }
 
-if (isset($_POST['username']) && isset($_POST['password']))
+if (isset($_POST['phone']))
 {
-    $username = mysqli_escape_string($conn, $_POST['username']);
-    $password = mysqli_escape_string($conn, $_POST['password']);
+    $phone = mysqli_escape_string($conn, $_POST['phone']);
 
-    $checkIfAlreadyRegistered = "SELECT access_token, username FROM buses WHERE username='$username' and password='$password'";
+    $checkIfAlreadyRegistered = "SELECT access_token FROM buses WHERE phone='$phone'";
     $result = mysqli_query($conn, $checkIfAlreadyRegistered);
     if (mysqli_num_rows($result) != 1)
     {
         $response = array(
             'result' => array(
                 'success' => False,
-                'message' => 'Username not registered.'
+                'message' => 'Phone number not registered.'
             )
         );
         die(json_encode($response));
     }
     else
     {
-        // $otp = generateOTP();
-        // $_SESSION['otp'] = $otp;
+        $otp = generateOTP();
+        $_SESSION['otp'] = $otp;
+
+        $sms_api = 'https://2factor.in/API/V1/c577a86c-09c5-11e9-a895-0200cd936042/SMS/'.$phone.'/'.$otp;
+
+        $send = file_get_contents($sms_api);
 
         $r=mysqli_fetch_assoc($result);
         $access_token = $r['access_token'];
@@ -42,11 +45,9 @@ if (isset($_POST['username']) && isset($_POST['password']))
         $response = array(
             'result' => array(
                 'success' => True,
-                'message' => 'Login successful.',
-                'data' => $r
+                'message' => 'Login successful.'
             )
         );
-       
         die(json_encode($response));
     }
 }

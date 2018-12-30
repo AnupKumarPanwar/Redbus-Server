@@ -38,7 +38,7 @@ $baseURL = 'http://localhost';
 $dbServer = 'localhost';
 $dbName = 'gotobuses';
 $dbUser = 'root';
-$dbPassword = 'biappanwar';
+$dbPassword = '';
 
 
 $conn = mysqli_connect($dbServer, $dbUser, $dbPassword, $dbName);
