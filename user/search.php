@@ -89,8 +89,10 @@ if (isset($_POST['slat']) && isset($_POST['slong']) && isset($_POST['type']) && 
 			}
 		}
 
+		echo $bestRouteId;
+		
 		if ($bestRouteId!=0) {
-			$getRoute = "SELECT *, r.id as route_id, b.id as bus_id FROM buses b, routes r WHERE b.id=r.id AND r.id='$bestRouteId'";
+			$getRoute = "SELECT *, r.id as route_id, b.id as bus_id FROM buses b, routes r WHERE b.id=r.bus_id AND r.id='$bestRouteId'";
 			$result = mysqli_query($conn, $getRoute);
 			$r=mysqli_fetch_assoc($result);
 
