@@ -11,7 +11,7 @@ if (isset($_POST['slat']) && isset($_POST['slong']) && isset($_POST['type']) && 
 	$dlong = mysqli_escape_string($conn, $_POST['dlong']);
 	$type = mysqli_escape_string($conn, $_POST['type']);
 
-	$searchBusQuery = "SELECT *, r.id as route_id, b.id as bus_id FROM buses b, routes r WHERE b.id=r.id AND b.bus_type='$type'";
+	$searchBusQuery = "SELECT *, r.id as route_id, b.id as bus_id FROM buses b, routes r WHERE b.id=r.bus_id AND b.bus_type='$type'";
 
 	$result = mysqli_query($conn, $searchBusQuery);
 
@@ -31,9 +31,10 @@ if (isset($_POST['slat']) && isset($_POST['slong']) && isset($_POST['type']) && 
 
 
 		while ($r = mysqli_fetch_assoc($result)) {
-			$latLong = explode(',', $r['source']);
+			$latLong = explode(',', $r['sourceLatLong']);
 			$lat = $latLong[0];
 			$long = $latLong[1];
+
 
 			$distance = ($lat-$slat)*($lat-$slat) + ($long-$slong)*($long-$slong);
 			if ($distance < $minDistSource) {
@@ -42,9 +43,11 @@ if (isset($_POST['slat']) && isset($_POST['slong']) && isset($_POST['type']) && 
 				$nearestSource = $latLong;
 			}
 
-			$waypoints = $r['waypoints'];
+			$waypoints = $r['waypointsLatLong'];
+			// echo $waypoints;
 			$waypoints_array = explode('|', $waypoints);
-			for ($i=0; $i < count($waypoints_array); $i++) { 
+			for ($i=0; $i < count($waypoints_array)-1; $i++) { 
+				// echo($waypoints_array[$i]);
 				$latLong = explode(',', $waypoints_array[$i]);
 				$lat = $latLong[0];
 				$long = $latLong[1];
@@ -57,7 +60,7 @@ if (isset($_POST['slat']) && isset($_POST['slong']) && isset($_POST['type']) && 
 				}
 			}
 
-			$latLong = explode(',', $r['destination']);
+			$latLong = explode(',', $r['destinationLatLong']);
 			$lat = $latLong[0];
 			$long = $latLong[1];
 
@@ -67,7 +70,7 @@ if (isset($_POST['slat']) && isset($_POST['slong']) && isset($_POST['type']) && 
 				$nearestDestination = $latLong;
 			}
 
-			for ($i=$sourceIndex; $i < count($waypoints_array); $i++) { 
+			for ($i=$sourceIndex; $i < count($waypoints_array)-1; $i++) { 
 				$latLong = explode(',', $waypoints_array[$i]);
 				$lat = $latLong[0];
 				$long = $latLong[1];
@@ -89,8 +92,8 @@ if (isset($_POST['slat']) && isset($_POST['slong']) && isset($_POST['type']) && 
 			}
 		}
 
-		echo $bestRouteId;
-		
+		// echo $bestRouteId;
+
 		if ($bestRouteId!=0) {
 			$getRoute = "SELECT *, r.id as route_id, b.id as bus_id FROM buses b, routes r WHERE b.id=r.bus_id AND r.id='$bestRouteId'";
 			$result = mysqli_query($conn, $getRoute);
