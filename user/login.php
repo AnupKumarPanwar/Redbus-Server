@@ -17,20 +17,39 @@ if (isset($_POST['phone']))
 {
     $phone = mysqli_escape_string($conn, $_POST['phone']);
 
-    $loginQuery = "SELECT * FROM users WHERE phone='$phone'";
-    $result = mysqli_query($conn, $loginQuery);
+    $checkIfAlreadyRegistered = "SELECT access_token FROM users WHERE phone='$phone'";
+    $result = mysqli_query($conn, $checkIfAlreadyRegistered);
+    if (mysqli_num_rows($result) != 1)
+    {
+        $response = array(
+            'result' => array(
+                'success' => False,
+                'message' => 'Phone number not registered.'
+            )
+        );
+        die(json_encode($response));
+    }
+    else
+    {
+        $otp = generateOTP();
+        $_SESSION['otp'] = $otp;
 
-    $r=mysqli_fetch_assoc($result);
+        $sms_api = 'https://2factor.in/API/V1/c577a86c-09c5-11e9-a895-0200cd936042/SMS/'.$phone.'/'.$otp;
 
-    $response = array(
-        'result' => array(
-            'success' => True,
-            'message' => 'Verify the OTP.',
-            'data' => $r
-        )
-    );
-   
-    die(json_encode($response));
+        $send = file_get_contents($sms_api);
+
+        $r=mysqli_fetch_assoc($result);
+        $access_token = $r['access_token'];
+        $_SESSION['access_token'] = $access_token;
+
+        $response = array(
+            'result' => array(
+                'success' => True,
+                'message' => 'Login successful.'
+            )
+        );
+        die(json_encode($response));
+    }
 }
 else
 {

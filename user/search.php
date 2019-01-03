@@ -1,7 +1,7 @@
 <?php
 
 require ('constants.php');
-// require ('middleware.php');
+require ('middleware.php');
 
 if (isset($_POST['slat']) && isset($_POST['slong']) && isset($_POST['type']) && isset($_POST['dlat']) && isset($_POST['dlong'])) {
 	
