@@ -3,12 +3,16 @@
 require ('constants.php');
 require ('middleware.php');
 
-if (isset($_POST['source']) && isset($_POST['destination']) &&) {
+if (isset($_POST['source']) && isset($_POST['destination']) && isset($_POST['route_id'])) {
 	
-	$bus_id = $_SESSION['user_id'];
-	$source = mysqli_escape_string($conn, $_POST['destination']);
+	$userId = $_SESSION['user_id'];
+	$routeId = mysqli_escape_string($conn, $_POST['route_id']);
+	$source = mysqli_escape_string($conn, $_POST['source']);
+	$destination = mysqli_escape_string($conn, $_POST['destination']);
 
-	// $addBooking = "INSERT INTO bookings (trip_id, user_id, source, destination) VALUES "
+	$
+
+	$addBooking = "INSERT INTO bookings (route_id, user_id, source, destination, booked_at) VALUES ('routeId', '$userId', '$source', '$destination', NOW())";
 
 }
 else {
