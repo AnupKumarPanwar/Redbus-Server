@@ -10,7 +10,7 @@ if (isset($_POST['last_location']) && isset($_POST['bearing'])) {
 	$lastLocation = mysqli_escape_string($conn, $_POST['last_location']);
 	$bearing = mysqli_escape_string($conn, $_POST['bearing']);
 
-	$updateLocation = "UPDATE buses SET last_location='$lastLocation', bearing='$bearing', last_updated_at=NOW() WHERE bus_id='$bus_id'";
+	$updateLocation = "UPDATE buses SET last_location='$lastLocation', bearing='$bearing', last_updated_at=NOW() WHERE id='$bus_id'";
 
 	$result = mysqli_query($conn, $updateLocation);
 
