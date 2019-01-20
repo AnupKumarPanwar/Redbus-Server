@@ -16,9 +16,6 @@ if (isset($_POST['slat']) && isset($_POST['slong']) && isset($_POST['type']) && 
 	$result = mysqli_query($conn, $searchBusQuery);
 
 	if ($result) {
-		$allStoresList=array();
-		$minDistSource = 50;
-		$minDistDestination = 10;
 		$sourceIndex = 0;
 		$minTotalDistance = 100;
 
@@ -31,6 +28,10 @@ if (isset($_POST['slat']) && isset($_POST['slong']) && isset($_POST['type']) && 
 
 
 		while ($r = mysqli_fetch_assoc($result)) {
+
+			$minDistSource = 50;
+			$minDistDestination = 10;
+			
 			$latLong = explode(',', $r['sourceLatLong']);
 			$lat = $latLong[0];
 			$long = $latLong[1];
