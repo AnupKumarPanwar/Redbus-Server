@@ -33,13 +33,19 @@ if (isset($_POST['routeId'])) {
 
 	$result = mysqli_query($conn, $addTrip);
 
+	$getTripId = "SELECT * FROM trips WHERE completed_at IS NULL AND route_id='$routeId'";
+	
+	$result2 = mysqli_query($conn, $getTripId);
+	$r = mysqli_fetch_assoc($result2);
+
 	// echo(mysqli_error($conn));
 
 	if ($result) {
 		$response = array(
 		    'result' => array(
 		        'success' => True,
-		        'message' => 'Trip started successfully.'
+		        'message' => 'Trip started successfully.',
+		        'data' => $r
 		    )
 		);
 		die(json_encode($response));
