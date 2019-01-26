@@ -33,7 +33,7 @@ if ($result) {
 	$response = array(
 	    'result' => array(
 	        'success' => True,
-	        'message' => 'Routes fetched successfully.',
+	        'message' => 'Bookings fetched successfully.',
 	        'data' => $allBookings
 	    )
 	);
@@ -43,7 +43,7 @@ else {
 	$response = array(
 	    'result' => array(
 	        'success' => False,
-	        'message' => 'Failed to get routes.'
+	        'message' => 'Failed to get bookings.'
 	    )
 	);
 	die(json_encode($response));

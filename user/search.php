@@ -103,7 +103,7 @@ if (isset($_POST['slat']) && isset($_POST['slong']) && isset($_POST['type']) && 
 			$response = array(
 			    'result' => array(
 			        'success' => True,
-			        'message' => 'Successfully fetched stores list.',
+			        'message' => 'Successfully fetched routes list.',
 			        'data' => array(
 			        	'neareatSource' => $bestSource,
 			        	'nearestDestination' => $bestDestination,
