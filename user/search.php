@@ -17,7 +17,7 @@ if (isset($_POST['slat']) && isset($_POST['slong']) && isset($_POST['type']) && 
 
 	if ($result) {
 		$sourceIndex = 0;
-		$minTotalDistance = 100;
+		$minTotalDistance = 2000;
 
 		$nearestSource = 0;
 		$nearestDestination = 0;
@@ -29,8 +29,8 @@ if (isset($_POST['slat']) && isset($_POST['slong']) && isset($_POST['type']) && 
 
 		while ($r = mysqli_fetch_assoc($result)) {
 
-			$minDistSource = 50;
-			$minDistDestination = 10;
+			$minDistSource = 500;
+			$minDistDestination = 500;
 			
 			$latLong = explode(',', $r['sourceLatLong']);
 			$lat = $latLong[0];
