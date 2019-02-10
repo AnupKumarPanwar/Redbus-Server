@@ -39,7 +39,7 @@ $response = array(
         'data' => array(
         	'neareatSource' => $bestSource,
         	'nearestDestination' => $bestDestination,
-            'otp' => '$otp',
+            'otp' => $otp,
             'fare' => $fare,
         	'route' => $r
         )
