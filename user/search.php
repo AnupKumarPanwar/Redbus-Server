@@ -107,6 +107,8 @@ if (isset($_POST['slat']) && isset($_POST['slong']) && isset($_POST['type']) && 
 			        'data' => array(
 			        	'neareatSource' => $bestSource,
 			        	'nearestDestination' => $bestDestination,
+			            'otp' => '0000',
+			            'fare' => '500',
 			        	'route' => $r
 			        )
 			    )
