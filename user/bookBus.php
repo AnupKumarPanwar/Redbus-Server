@@ -28,7 +28,7 @@ if (isset($_POST['source']) && isset($_POST['destination']) && isset($_POST['rou
 
 	$otp = generateOTP();
 
-	$addBooking = "INSERT INTO bookings (user_id, trip_id, pickup_point, dropoff_point, otp, fare) VALUES ('$userId', '$tripId', '$source', '$destination', '$otp', 100)";
+	$addBooking = "INSERT INTO bookings (user_id, trip_id, pickup_point, dropoff_point, otp, fare) VALUES ('$userId', '$tripId', '$source', '$destination', '$otp', 500)";
 
 	$result = mysqli_query($conn, $addBooking);
 
@@ -39,7 +39,7 @@ if (isset($_POST['source']) && isset($_POST['destination']) && isset($_POST['rou
 		        'message' => 'Booking successful.',
 		        'data' => array(
 		        	'otp' => $otp,
-		        	'fare' => 100
+		        	'fare' => 500
 		        )
 		    )
 		);

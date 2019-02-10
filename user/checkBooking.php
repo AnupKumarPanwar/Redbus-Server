@@ -5,7 +5,7 @@ require ('middleware.php');
 
 $user_id = $_SESSION['user_id'];
 
-$getBookings = "SELECT route_id, pickup_point, dropoff_point  FROM bookings, trips WHERE bookings.user_id='$user_id' AND dropoff_at IS NULL AND bookings.trip_id=trips.id";
+$getBookings = "SELECT route_id, pickup_point, dropoff_point  FROM bookings, trips WHERE bookings.user_id='$user_id' AND dropoff_at IS NULL AND cancelled=0 AND bookings.trip_id=trips.id";
 
 $result = mysqli_query($conn, $getBookings);
 

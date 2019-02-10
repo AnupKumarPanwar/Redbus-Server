@@ -71,7 +71,7 @@ if (isset($_POST['slat']) && isset($_POST['slong']) && isset($_POST['type']) && 
 				$nearestDestination = $latLong;
 			}
 
-			for ($i=$sourceIndex+1; $i < count($waypoints_array)-1; $i++) { 
+			for ($i=$sourceIndex; $i < count($waypoints_array)-1; $i++) { 
 				$latLong = explode(',', $waypoints_array[$i]);
 				$lat = $latLong[0];
 				$long = $latLong[1];
