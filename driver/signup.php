@@ -1,6 +1,6 @@
 <?php
 
-require ('constants.php');
+include_once ('constants.php');
 session_start();
 
 function generateAccessToken($length = 20) {
@@ -42,7 +42,7 @@ if (isset($_POST['phone']) && isset($_POST['name']) && isset($_POST['email']) &&
                 'message' => 'Phone number already registered.'
             )
         );
-        die(json_encode($response));
+        die(sendResponse($response));
     }
 
     $checkIfBusAlreadyRegistered = "SELECT name FROM buses WHERE bus_number='$bus_number'";
@@ -55,7 +55,7 @@ if (isset($_POST['phone']) && isset($_POST['name']) && isset($_POST['email']) &&
                 'message' => 'Bus number already registered.'
             )
         );
-        die(json_encode($response));
+        die(sendResponse($response));
     }
 
     $checkIfEmailAlreadyRegistered = "SELECT name FROM buses WHERE email='$email'";
@@ -69,7 +69,7 @@ if (isset($_POST['phone']) && isset($_POST['name']) && isset($_POST['email']) &&
                 'message' => 'Email already registered.'
             )
         );
-        die(json_encode($response));
+        die(sendResponse($response));
     }
     else
     {
@@ -95,7 +95,7 @@ if (isset($_POST['phone']) && isset($_POST['name']) && isset($_POST['email']) &&
                 )
             );
            
-            die(json_encode($response));
+            die(sendResponse($response));
         }
         else
         {
@@ -105,7 +105,7 @@ if (isset($_POST['phone']) && isset($_POST['name']) && isset($_POST['email']) &&
                     'message' => 'Registration failed.'
                 )
             );
-            die(json_encode($response));
+            die(sendResponse($response));
         }   
    
     }
@@ -118,7 +118,7 @@ else
             'data' => 'Some error occured.'
         )
     );
-    die(json_encode($response));
+    die(sendResponse($response));
 }
 
 ?>

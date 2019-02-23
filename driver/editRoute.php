@@ -1,7 +1,7 @@
 <?php
 
-require ('constants.php');
-require ('middleware.php');
+include_once ('constants.php');
+include_once ('middleware.php');
 
 
 if (isset($_POST['routeId']) && isset($_POST['waypoints']) && isset($_POST['source']) && isset($_POST['destination']) && isset($_POST['departure_time']) && isset($_POST['waypointsLatLong']) && isset($_POST['sourceLatLong']) && isset($_POST['destinationLatLong'])) {
@@ -28,7 +28,7 @@ if (isset($_POST['routeId']) && isset($_POST['waypoints']) && isset($_POST['sour
 		        'message' => 'Route added successfully.'
 		    )
 		);
-		die(json_encode($response));
+		die(sendResponse($response));
 	}
 	else {
 		$response = array(
@@ -37,7 +37,7 @@ if (isset($_POST['routeId']) && isset($_POST['waypoints']) && isset($_POST['sour
 		        'message' => 'Failed to add route.'
 		    )
 		);
-		die(json_encode($response));
+		die(sendResponse($response));
 	}
 }
 else
@@ -48,6 +48,6 @@ else
             'message' => 'Some error occured.'
         )
     );
-    die(json_encode($response));
+    die(sendResponse($response));
 }
 ?>

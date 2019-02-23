@@ -6,6 +6,6 @@
 	        'message' => 'Some error occured.'
 	    )
 	);
-	die(json_encode($response));
+	die(sendResponse($response));
 
 ?>

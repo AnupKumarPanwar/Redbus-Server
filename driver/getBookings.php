@@ -1,7 +1,7 @@
 <?php
 
-require ('constants.php');
-require ('middleware.php');
+include_once ('constants.php');
+include_once ('middleware.php');
 
 $bus_id = $_SESSION['bus_id'];
 
@@ -15,7 +15,7 @@ if (mysqli_num_rows($result)==0) {
 	        'message' => 'No bookings.'
 	    )
 	);
-	die(json_encode($response));
+	die(sendResponse($response));
 }
 
 $r = mysqli_fetch_assoc($result);
@@ -37,7 +37,7 @@ if ($result) {
 	        'data' => $allBookings
 	    )
 	);
-	die(json_encode($response));
+	die(sendResponse($response));
 }
 else {
 	$response = array(
@@ -46,7 +46,7 @@ else {
 	        'message' => 'Failed to get bookings.'
 	    )
 	);
-	die(json_encode($response));
+	die(sendResponse($response));
 }
 
 ?>

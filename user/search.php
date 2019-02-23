@@ -1,7 +1,7 @@
 <?php
 
-require ('constants.php');
-require ('middleware.php');
+include_once ('constants.php');
+include_once ('middleware.php');
 
 if (isset($_POST['slat']) && isset($_POST['slong']) && isset($_POST['type']) && isset($_POST['dlat']) && isset($_POST['dlong'])) {
 	
@@ -113,7 +113,7 @@ if (isset($_POST['slat']) && isset($_POST['slong']) && isset($_POST['type']) && 
 			        )
 			    )
 			);
-			die(json_encode($response));	
+			die(sendResponse($response));	
 		}
 		else {
 			$response = array(
@@ -122,7 +122,7 @@ if (isset($_POST['slat']) && isset($_POST['slong']) && isset($_POST['type']) && 
 		        'message' => 'No bus available on this route.'
 		    )
 		);
-		die(json_encode($response));
+		die(sendResponse($response));
 		}
 	}
 	else {
@@ -132,7 +132,7 @@ if (isset($_POST['slat']) && isset($_POST['slong']) && isset($_POST['type']) && 
 		        'message' => 'Failed to check routes.'
 		    )
 		);
-		die(json_encode($response));
+		die(sendResponse($response));
 	}
 }
 else {
@@ -142,6 +142,6 @@ else {
 	        'message' => 'Some error occured.'
 	    )
 	);
-	die(json_encode($response));
+	die(sendResponse($response));
 }
 ?>

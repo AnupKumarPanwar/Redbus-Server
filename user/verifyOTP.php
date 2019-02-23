@@ -1,6 +1,6 @@
 <?php
 
-require ('constants.php');
+include_once ('constants.php');
 session_start();
 
 function generateAccessToken($length = 20) {
@@ -28,7 +28,7 @@ if (isset($_POST['otp']))
                 'message' => 'Incorrect OTP.'
             )
         );
-        die(json_encode($response));
+        die(sendResponse($response));
     }
     else
     {
@@ -49,7 +49,7 @@ if (isset($_POST['otp']))
                     )
                 )
             );
-            die(json_encode($response));   
+            die(sendResponse($response));   
         }
         else {
             $response = array(
@@ -58,7 +58,7 @@ if (isset($_POST['otp']))
                     'message' => 'Some error occured.'
                 )
             );
-            die(json_encode($response));
+            die(sendResponse($response));
         }
     }
 }
@@ -70,7 +70,7 @@ else
             'message' => 'Some error occured.'
         )
     );
-    die(json_encode($response));
+    die(sendResponse($response));
 }
 
 ?>

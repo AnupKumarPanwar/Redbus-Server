@@ -1,7 +1,7 @@
 <?php
 
-require ('constants.php');
-require ('middleware.php');
+include_once ('constants.php');
+include_once ('middleware.php');
 
 function generateOTP($length = 4) {
     $characters = '0123456789';
@@ -43,7 +43,7 @@ if (isset($_POST['source']) && isset($_POST['destination']) && isset($_POST['rou
 		        )
 		    )
 		);
-		die(json_encode($response));
+		die(sendResponse($response));
 	}
 	else {
 		$response = array(
@@ -52,7 +52,7 @@ if (isset($_POST['source']) && isset($_POST['destination']) && isset($_POST['rou
 		        'message' => 'Booking failed.'
 		    )
 		);
-		die(json_encode($response));
+		die(sendResponse($response));
 	}
 }
 else {
@@ -62,6 +62,6 @@ else {
 	        'message' => 'Some error occured.'
 	    )
 	);
-	die(json_encode($response));
+	die(sendResponse($response));
 }
 ?>

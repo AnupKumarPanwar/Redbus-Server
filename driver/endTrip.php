@@ -1,7 +1,7 @@
 <?php
 
-require ('constants.php');
-require ('middleware.php');
+include_once ('constants.php');
+include_once ('middleware.php');
 
 
 if (isset($_POST['tripId'])) {
@@ -35,7 +35,7 @@ if (isset($_POST['tripId'])) {
 		        'message' => 'Trip completed successfully.'
 		    )
 		);
-		die(json_encode($response));
+		die(sendResponse($response));
 	}
 	else {
 		$response = array(
@@ -44,7 +44,7 @@ if (isset($_POST['tripId'])) {
 		        'message' => 'Failed to complete trip.'
 		    )
 		);
-		die(json_encode($response));
+		die(sendResponse($response));
 	}
 }
 else
@@ -55,6 +55,6 @@ else
             'message' => 'Some error occured.'
         )
     );
-    die(json_encode($response));
+    die(sendResponse($response));
 }
 ?>

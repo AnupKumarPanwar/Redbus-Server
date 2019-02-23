@@ -1,7 +1,7 @@
 <?php
 
-require ('constants.php');
-require ('middleware.php');
+include_once ('constants.php');
+include_once ('middleware.php');
 
 $user_id = $_SESSION['user_id'];
 
@@ -18,7 +18,7 @@ if(mysqli_num_rows($result)!=1) {
 	        'message' => 'No bookings.'
 	    )
 	);
-	die(json_encode($response));
+	die(sendResponse($response));
 }
 
 $r = mysqli_fetch_assoc($result);
@@ -45,6 +45,6 @@ $response = array(
         )
     )
 );
-die(json_encode($response));	
+die(sendResponse($response));	
 
 ?>

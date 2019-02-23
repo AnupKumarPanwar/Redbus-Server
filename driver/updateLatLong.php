@@ -1,7 +1,7 @@
 <?php
 
-require ('constants.php');
-require ('middleware.php');
+include_once ('constants.php');
+include_once ('middleware.php');
 
 
 if (isset($_POST['last_location']) && isset($_POST['bearing'])) {
@@ -21,7 +21,7 @@ if (isset($_POST['last_location']) && isset($_POST['bearing'])) {
 		        'message' => 'Bus location updated successfully.'
 		    )
 		);
-		die(json_encode($response));
+		die(sendResponse($response));
 	}
 	else {
 		$response = array(
@@ -30,7 +30,7 @@ if (isset($_POST['last_location']) && isset($_POST['bearing'])) {
 		        'message' => 'Failed to update bus location.'
 		    )
 		);
-		die(json_encode($response));
+		die(sendResponse($response));
 	}
 }
 else
@@ -41,6 +41,6 @@ else
             'message' => 'Some error occured.'
         )
     );
-    die(json_encode($response));
+    die(sendResponse($response));
 }
 ?>

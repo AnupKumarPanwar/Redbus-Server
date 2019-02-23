@@ -1,6 +1,6 @@
 <?php
 
-require ('constants.php');
+include_once ('constants.php');
 session_start();
 
 function generateOTP($length = 4) {
@@ -27,7 +27,7 @@ if (isset($_POST['phone']))
                 'message' => 'Phone number not registered.'
             )
         );
-        die(json_encode($response));
+        die(sendResponse($response));
     }
     else
     {
@@ -48,7 +48,7 @@ if (isset($_POST['phone']))
                 'message' => 'Login successful.'
             )
         );
-        die(json_encode($response));
+        die(sendResponse($response));
     }
 }
 else
@@ -59,7 +59,7 @@ else
             'message' => 'Some error occured.'
         )
     );
-    die(json_encode($response));
+    die(sendResponse($response));
 }
 
 ?>

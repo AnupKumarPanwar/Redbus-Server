@@ -1,6 +1,6 @@
 <?php
 
-require ('constants.php');
+include_once ('constants.php');
 session_start();
 
 function generateAccessToken($length = 20) {
@@ -42,7 +42,7 @@ if (isset($_POST['phone']) && isset($_POST['name']) && isset($_POST['email']) &&
                 'message' => 'Phone number already registered.'
             )
         );
-        die(json_encode($response));
+        die(sendResponse($response));
     }
 
     $checkIfEmailAlreadyRegistered = "SELECT name FROM users WHERE email='$email'";
@@ -56,7 +56,7 @@ if (isset($_POST['phone']) && isset($_POST['name']) && isset($_POST['email']) &&
                 'message' => 'Email already registered.'
             )
         );
-        die(json_encode($response));
+        die(sendResponse($response));
     }
     else
     {
@@ -82,7 +82,7 @@ if (isset($_POST['phone']) && isset($_POST['name']) && isset($_POST['email']) &&
                 )
             );
            
-            die(json_encode($response));
+            die(sendResponse($response));
         }
         else
         {
@@ -92,7 +92,7 @@ if (isset($_POST['phone']) && isset($_POST['name']) && isset($_POST['email']) &&
                     'message' => 'Registration failed.'
                 )
             );
-            die(json_encode($response));
+            die(sendResponse($response));
         }   
    
     }
@@ -105,7 +105,7 @@ else
             'data' => 'Some error occured.'
         )
     );
-    die(json_encode($response));
+    die(sendResponse($response));
 }
 
 ?>

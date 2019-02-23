@@ -1,6 +1,6 @@
 <?php
 
-require 'constants.php';
+include_once 'constants.php';
 session_start();
 
 $headers = apache_request_headers();
@@ -13,7 +13,7 @@ if (!isset($headers['Authorization']) || empty($headers['Authorization'])) {
 	        'message' => 'Invalid access token.'
 	    )
 	);
-	die(json_encode($response));
+	die(sendResponse($response));
 } else {
 	$access_token = mysqli_escape_string($conn, $headers['Authorization']);
 	$checkAccessToken = "SELECT id, access_token FROM buses WHERE access_token = '$access_token'";
@@ -25,7 +25,7 @@ if (!isset($headers['Authorization']) || empty($headers['Authorization'])) {
 		        'message' => 'Invalid access token.'
 		    )
 		);
-		die(json_encode($response));
+		die(sendResponse($response));
 	}
 	else {
 		$bus_id = mysqli_fetch_assoc($result)['id'];

@@ -1,7 +1,7 @@
 <?php
 
-require ('constants.php');
-require ('middleware.php');
+include_once ('constants.php');
+include_once ('middleware.php');
 
 $bus_id = $_SESSION['bus_id'];
 
@@ -21,7 +21,7 @@ if ($result) {
 	        'data' => $allRoutes
 	    )
 	);
-	die(json_encode($response));
+	die(sendResponse($response));
 }
 else {
 	$response = array(
@@ -30,7 +30,7 @@ else {
 	        'message' => 'Failed to get routes.'
 	    )
 	);
-	die(json_encode($response));
+	die(sendResponse($response));
 }
 
 ?>

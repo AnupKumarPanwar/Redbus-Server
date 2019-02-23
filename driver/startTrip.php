@@ -1,7 +1,7 @@
 <?php
 
-require ('constants.php');
-require ('middleware.php');
+include_once ('constants.php');
+include_once ('middleware.php');
 
 
 if (isset($_POST['routeId'])) {
@@ -25,7 +25,7 @@ if (isset($_POST['routeId'])) {
 		        'message' => 'Trip already started'
 		    )
 		);
-		die(json_encode($response));
+		die(sendResponse($response));
 	}
 	else {
 		$addTrip = "INSERT INTO trips (bus_id, route_id, started_at) VALUES ('$bus_id', '$routeId', NOW())";
@@ -48,7 +48,7 @@ if (isset($_POST['routeId'])) {
 		        'data' => $r
 		    )
 		);
-		die(json_encode($response));
+		die(sendResponse($response));
 	}
 	else {
 		$response = array(
@@ -57,7 +57,7 @@ if (isset($_POST['routeId'])) {
 		        'message' => 'Failed to start trip.'
 		    )
 		);
-		die(json_encode($response));
+		die(sendResponse($response));
 	}
 }
 else
@@ -68,6 +68,6 @@ else
             'message' => 'Some error occured.'
         )
     );
-    die(json_encode($response));
+    die(sendResponse($response));
 }
 ?>

@@ -1,7 +1,7 @@
 <?php
 
-require('constants.php');
-require('middleware.php');
+include_once('constants.php');
+include_once('middleware.php');
 
 $bus_id = $_SESSION['bus_id'];
 
@@ -17,7 +17,7 @@ if ($result) {
 				'message' => 'No active trips.'
 			)
 		);
-		die(json_encode($response));
+		die(sendResponse($response));
 	}
 	$r = mysqli_fetch_assoc($result);
 	$response = array(
@@ -27,7 +27,7 @@ if ($result) {
 			'data' => $r
 		)
 	);
-	die(json_encode($response));
+	die(sendResponse($response));
 } else {
 	$response = array(
 		'result' => array(
@@ -35,7 +35,7 @@ if ($result) {
 			'message' => 'Failed to get active trip.'
 		)
 	);
-	die(json_encode($response));
+	die(sendResponse($response));
 }
 
 ?>

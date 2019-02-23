@@ -1,7 +1,7 @@
 <?php
 
-require ('constants.php');
-require ('middleware.php');
+include_once ('constants.php');
+include_once ('middleware.php');
 
 $userId = $_SESSION['user_id'];
 
@@ -16,7 +16,7 @@ if(mysqli_num_rows($result)==1) {
             'message' => 'Trip has already started.'
         )
     );
-    die(json_encode($response));
+    die(sendResponse($response));
 }
 else
 {
@@ -31,7 +31,7 @@ else
                     'message' => 'Trip cancelled successfully.'
                 )
             );
-        die(json_encode($response));
+        die(sendResponse($response));
     }
     else {
         $response = array(
@@ -40,7 +40,7 @@ else
                 'message' => 'Some error occured.'
             )
         );
-        die(json_encode($response));
+        die(sendResponse($response));
     }
 }
 ?>
