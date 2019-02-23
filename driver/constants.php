@@ -33,12 +33,12 @@ ini_set('display_errors', 1);
 
 
 	
-$baseURL = 'http://localhost';
+// $baseURL = 'http://localhost';
 
-$dbServer = 'localhost';
-$dbName = 'gotobuses';
-$dbUser = 'root';
-$dbPassword = '';
+// $dbServer = 'localhost';
+// $dbName = 'gotobuses';
+// $dbUser = 'root';
+// $dbPassword = '';
 
 
 $baseURL = 'http://68.183.82.58';
