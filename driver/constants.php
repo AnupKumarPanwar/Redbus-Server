@@ -35,18 +35,18 @@ ini_set('display_errors', 1);
 	
 $baseURL = 'http://localhost';
 
-$dbServer = 'localhost';
-$dbName = 'gotobuses';
-$dbUser = 'root';
-$dbPassword = '';
-
-
-// $baseURL = 'http://68.183.82.58';
-
 // $dbServer = 'localhost';
 // $dbName = 'gotobuses';
 // $dbUser = 'root';
-// $dbPassword = 'D4dinesh@123S';
+// $dbPassword = '';
+
+
+$baseURL = 'http://68.183.82.58';
+
+$dbServer = 'localhost';
+$dbName = 'gotobuses';
+$dbUser = 'root';
+$dbPassword = 'D4dinesh@123S';
 
 
 $conn = mysqli_connect($dbServer, $dbUser, $dbPassword, $dbName);
