@@ -4,7 +4,7 @@ include_once ('constants.php');
 include_once ('middleware.php');
 
 $user_id = $_SESSION['user_id'];
-$getTrips = "SELECT * FROM bookings, trips, buses WHERE bookings.trip_id = trips.id AND trips.bus_id=buses.id AND bookings.user_id='$user_id' ORDER BY bookings.booking_time desc";
+$getTrips = "SELECT * FROM bookings, trips, buses WHERE bookings.trip_id = trips.id AND trips.bus_id=buses.id AND bookings.user_id='$user_id' ORDER BY bookings.booked_at desc";
 
 $result = mysqli_query($conn, $getTrips);
 
