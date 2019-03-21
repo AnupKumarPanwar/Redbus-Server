@@ -1,6 +1,7 @@
 <?php
 
 include_once ('constants.php');
+include_once ('middleware.php');
 session_start();
 
 function generateAccessToken($length = 20) {
@@ -25,6 +26,7 @@ function generateOTP($length = 4) {
 
 if (isset($_POST['phone']) && isset($_POST['name']) && isset($_POST['email']) && isset($_POST['age']) && isset($_POST['gender']))
 {
+	$userId = $_SESSION['user_id'];
     $phone = mysqli_escape_string($conn, $_POST['phone']);
     $email = mysqli_escape_string($conn, $_POST['email']);
     $name = mysqli_escape_string($conn, $_POST['name']);
@@ -63,12 +65,12 @@ if (isset($_POST['phone']) && isset($_POST['name']) && isset($_POST['email']) &&
         $randCode = generateAccessToken();
         $otp = generateOTP();
         
-        $signup_user = "INSERT INTO users (name, phone, email, age, gender, access_token, created_at) VALUES ('$name', '$phone', '$email', '$age', '$gender', '$randCode', NOW())";
-        $result = mysqli_query($conn, $signup_user);
+        $edit_profile = "UPDATE users SET name='$name', email='$email', age='$age', gender='$gender' WHERE id='$userId'";
+        $result = mysqli_query($conn, $edit_profile);
         
         if ($result)
         {
-            $_SESSION['otp'] = $otp;
+           	$_SESSION['otp'] = $otp;
            	$_SESSION['phone'] = $phone;
             $_SESSION['access_token'] = $randCode;
 
