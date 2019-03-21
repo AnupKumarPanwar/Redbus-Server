@@ -34,7 +34,6 @@ if (isset($_POST['otp']))
     {
         $access_token = $_SESSION['access_token'];
         $phone = $_SESSION['phone'];
-        echo($phone);
         $randCode = generateAccessToken();
         $updateAccessToken = "UPDATE users set access_token='$randCode', phone='$phone' WHERE access_token='$access_token'";
         $result = mysqli_query($conn, $updateAccessToken);

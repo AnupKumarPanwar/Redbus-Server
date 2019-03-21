@@ -61,7 +61,6 @@ if (isset($_POST['phone']) && isset($_POST['name']) && isset($_POST['email']) &&
     }
     else
     {
-        $randCode = generateAccessToken();
         $otp = generateOTP();
         
         $edit_profile = "UPDATE users SET name='$name', email='$email', age='$age', gender='$gender' WHERE id='$userId'";
@@ -71,7 +70,6 @@ if (isset($_POST['phone']) && isset($_POST['name']) && isset($_POST['email']) &&
         {
            	$_SESSION['otp'] = $otp;
            	$_SESSION['phone'] = $phone;
-            $_SESSION['access_token'] = $randCode;
 
             $sms_api = 'https://2factor.in/API/V1/c577a86c-09c5-11e9-a895-0200cd936042/SMS/'.$phone.'/'.$otp;
 
