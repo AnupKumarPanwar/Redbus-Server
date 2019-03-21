@@ -2,7 +2,6 @@
 
 include_once ('constants.php');
 include_once ('middleware.php');
-session_start();
 
 function generateAccessToken($length = 20) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
