@@ -17,7 +17,7 @@ if ($result) {
 		    'result' => array(
 		        'success' => True,
 		        'message' => 'Trips fetched successfully.',
-		        'data' => $r
+		        'data' => $allTrips
 		    )
 		);
 		die(sendResponse($response));
