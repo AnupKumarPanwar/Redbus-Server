@@ -41,6 +41,7 @@ if (isset($_POST['phone']))
         $r=mysqli_fetch_assoc($result);
         $access_token = $r['access_token'];
         $_SESSION['access_token'] = $access_token;
+        $_SESSION['phone'] = $phone;
 
         $response = array(
             'result' => array(
