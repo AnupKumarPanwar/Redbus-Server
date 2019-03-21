@@ -11,6 +11,18 @@ $result = mysqli_query($conn, $getTrips);
 if ($result) {
 		$allTrips = array();
 		while ($r = mysqli_fetch_assoc($result)) {
+			if ($r['cancelled']==1) {
+				$r['status']='Cancelled';
+			}
+			elseif (!is_null($r['dropoff_at'])) {
+				$r['status']='Completed';
+			}
+			elseif (!is_null($r['pickup_at'])) {
+				$r['status']='Ongoing';	
+			}
+			else {
+				$r['status']='Upcoming';
+			}
 			$allTrips[] = $r;
 		}
 		$response = array(
