@@ -9,9 +9,10 @@ $getTrips = "SELECT * FROM bookings, trips, buses WHERE bookings.trip_id = trips
 $result = mysqli_query($conn, $getTrips);
 
 if ($result) {
-	
-		$r = mysqli_fetch_assoc($result);
-
+		$allTrips = array();
+		while ($r = mysqli_fetch_assoc($result)) {
+			$allTrips[] = $r;
+		}
 		$response = array(
 		    'result' => array(
 		        'success' => True,
