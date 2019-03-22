@@ -39,7 +39,7 @@ if (isset($_POST['source']) && isset($_POST['destination']) && isset($_POST['rou
 	$otp = generateOTP();
 	$pnr = generatePNR();
 
-	$addBooking = "INSERT INTO bookings (user_id, trip_id, pickup_point, dropoff_point, pnr, otp, fare) VALUES ('$userId', '$tripId', '$source', '$destination', '$pnr', $otp', 500)";
+	$addBooking = "INSERT INTO bookings (user_id, trip_id, pickup_point, dropoff_point, pnr, otp, fare) VALUES ('$userId', '$tripId', '$source', '$destination', '$pnr', '$otp', 500)";
 
 	$result = mysqli_query($conn, $addBooking);
 
