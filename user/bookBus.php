@@ -13,6 +13,16 @@ function generateOTP($length = 4) {
     return $randomString;
 }
 
+function generatePNR($length = 6) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
 if (isset($_POST['source']) && isset($_POST['destination']) && isset($_POST['route_id']) && isset($_POST['bus_id'])) {
 	
 	$userId = $_SESSION['user_id'];
@@ -27,8 +37,9 @@ if (isset($_POST['source']) && isset($_POST['destination']) && isset($_POST['rou
 	$tripId = $r['id'];
 
 	$otp = generateOTP();
+	$pnr = generatePNR();
 
-	$addBooking = "INSERT INTO bookings (user_id, trip_id, pickup_point, dropoff_point, otp, fare) VALUES ('$userId', '$tripId', '$source', '$destination', '$otp', 500)";
+	$addBooking = "INSERT INTO bookings (user_id, trip_id, pickup_point, dropoff_point, pnr, otp, fare) VALUES ('$userId', '$tripId', '$source', '$destination', '$pnr', $otp', 500)";
 
 	$result = mysqli_query($conn, $addBooking);
 
