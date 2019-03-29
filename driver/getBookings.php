@@ -21,7 +21,7 @@ if (mysqli_num_rows($result)==0) {
 $r = mysqli_fetch_assoc($result);
 $tripId = $r['id'];
 
-$getBookings = "SELECT bookings.id as bookingId, phone, name, age, gender, pickup_point, dropoff_point, otp, fare FROM bookings, users WHERE trip_id='$tripId' AND users.id=bookings.user_id AND cancelled=0";
+$getBookings = "SELECT bookings.id as bookingId, phone, name, age, gender, pickup_point, dropoff_point, otp, fare, status FROM bookings, users WHERE trip_id='$tripId' AND users.id=bookings.user_id AND cancelled=0";
 
 $result = mysqli_query($conn, $getBookings);
 
