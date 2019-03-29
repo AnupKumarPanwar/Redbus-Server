@@ -13,7 +13,7 @@ if (isset($_POST['bookingId']) && isset($_POST['otp'])) {
 
 	$result = mysqli_query($conn, $updateBookingStatus);
 
-	if (mysqli_affected_rows($result)==1) {
+	if (mysqli_affected_rows($conn)==1) {
 		$response = array(
 			'result' => array(
 				'success' => true,
