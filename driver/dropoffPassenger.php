@@ -18,7 +18,8 @@ if (isset($_POST['bookingId'])) {
 		$r = mysqli_fetch_assoc($result);
 		$userId = $r['user_id'];
 		$fare = $r['fare'];
-		$cashbackAmount = rand(1, $fare/5);
+		$cashbackAmount = rand(1, ($fare)/5);
+		echo($cashbackAmount);
 
 		$giveCashback = "INSERT into cashbacks (user_id, booking_id, amount, status, created_at) VALUES ('$userId', '$bookingId', '$cashbackAmount', NOW())";
 
