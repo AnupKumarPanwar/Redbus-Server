@@ -9,7 +9,7 @@ if (isset($_POST['scratchCardId'])) {
 
     $scratchCardId = mysqli_escape_string($conn, $_POST['scratchCardId']);
 
-    $redeemScratchCard = "UPDATE users, cashbacks SET credits=cashbacks.amount, cashbacks.status='SCRATCHED' WHERE users.id='$userId' AND cashbacks.id='$scratchCardId' AND cashbacks.status='CREATED'";
+    $redeemScratchCard = "UPDATE users, cashbacks SET credits=credits+cashbacks.amount, cashbacks.status='SCRATCHED' WHERE users.id='$userId' AND cashbacks.id='$scratchCardId' AND cashbacks.status='CREATED'";
 
     $result = mysqli_query($conn, $redeemScratchCard);
 
