@@ -16,7 +16,7 @@ if (isset($_POST['scratchCardId'])) {
     if ($result) {
         $response = array(
             'result' => array(
-                'success' => false,
+                'success' => True,
                 'message' => 'Cashback redeemed successfully.'
             )
         );
