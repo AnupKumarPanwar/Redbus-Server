@@ -3,12 +3,14 @@
 include_once ('constants.php');
 include_once ('middleware.php');
 
-if (isset($_POST['source']) && isset($_POST['destination'])) {
+if (isset($_POST['sourceLat']) && isset($_POST['sourceLng']) && isset($_POST['destinationLat']) && isset($_POST['destinationLng'])) {
 	
-	$source = mysqli_escape_string($conn, $_POST['source']);
-	$destination = mysqli_escape_string($conn, $_POST['destination']);
+	$sourceLat = number_format(floatval(mysqli_escape_string($conn, $_POST['sourceLat'])),1,'.','');
+	$sourceLng = number_format(floatval(mysqli_escape_string($conn, $_POST['sourceLng'])),1,'.','');
+	$destinationLat = number_format(floatval(mysqli_escape_string($conn, $_POST['destinationLat'])),1,'.','');
+	$destinationLng = number_format(floatval(mysqli_escape_string($conn, $_POST['destinationLng'])),1,'.','');
 
-	$searchBusQuery = "SELECT *, r.id as route_id, b.id as bus_id FROM buses b, routes r WHERE (r.waypoints LIKE '%$source%$destination%' OR (r.source LIKE '%$source%' AND r.waypoints LIKE '%$destination%') OR (r.source LIKE '%$source%' AND r.destination LIKE '%$destination%') OR (r.waypoints LIKE '%$source%' AND r.destination LIKE '%$destination%')) AND b.id=r.bus_id";
+	$searchBusQuery = "SELECT *, r.id as route_id, b.id as bus_id FROM buses b, routes r WHERE (r.waypointsLatLong LIKE '%$sourceLat%,$sourceLng%$destinationLat%,$destinationLng%') AND b.id=r.bus_id";
 
 	$result = mysqli_query($conn, $searchBusQuery);
 
