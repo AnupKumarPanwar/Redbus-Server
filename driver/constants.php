@@ -41,7 +41,7 @@ $baseURL = 'http://localhost';
 // $dbPassword = '';
 
 
-$baseURL = 'http://68.183.82.58';
+$baseURL = 'http://142.93.218.37';
 
 $dbServer = 'localhost';
 $dbName = 'gotobuses';
