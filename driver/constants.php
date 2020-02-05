@@ -41,10 +41,10 @@ $baseURL = 'http://localhost';
 // $dbPassword = '';
 
 
-$baseURL = 'http://142.93.218.37';
+$baseURL = 'http://139.59.75.126';
 
 $dbServer = 'localhost';
-$dbName = 'gotobuses';
+$dbName = 'gotobus';
 $dbUser = 'root';
 $dbPassword = 'D4dinesh@123S';
 
