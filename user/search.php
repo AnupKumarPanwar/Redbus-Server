@@ -11,7 +11,7 @@ if (isset($_POST['slat']) && isset($_POST['slong']) && isset($_POST['type']) && 
 	$dlong = mysqli_escape_string($conn, $_POST['dlong']);
 	$type = mysqli_escape_string($conn, $_POST['type']);
 
-	$searchBusQuery = "SELECT *, r.id as route_id, b.id as bus_id FROM buses b, routes r WHERE b.id=r.bus_id AND b.bus_type='$type'";
+	$searchBusQuery = "SELECT *, r.id as route_id, b.id as bus_id FROM buses b, routes r, trips t WHERE b.id=r.bus_id AND b.bus_type='$type' AND t.route_id=r.id AND t.completed_at IS NULL";
 
 	$result = mysqli_query($conn, $searchBusQuery);
 
